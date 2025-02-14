@@ -31,9 +31,15 @@ data:
       - job_name: 'kubernetes-pods'
         kubernetes_sd_configs:
           - role: pod
+        namespace_selector:
+          match_names:
+            - '*'  # Scrape pods from all namespaces
       - job_name: 'kubernetes-services'
         kubernetes_sd_configs:
           - role: service
+        namespace_selector:
+          match_names:
+            - '*'  # Scrape services from all namespaces
 ---
 apiVersion: apps/v1
 kind: Deployment
