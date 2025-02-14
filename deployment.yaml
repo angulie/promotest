@@ -52,6 +52,13 @@ spec:
       labels:
         app: prometheus
     spec:
+      initContainers:
+        - name: fix-permissions
+          image: busybox
+          command: ["sh", "-c", "chmod -R 777 /prometheus"]
+          volumeMounts:
+            - name: storage-volume
+              mountPath: /prometheus
       containers:
         - name: prometheus
           image: prom/prometheus:v2.37.0
